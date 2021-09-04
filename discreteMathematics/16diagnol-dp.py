@@ -3,10 +3,10 @@ import time
 
 size = 10
 
-canLine = [] #possible line combination
-listLine = {} #key: comb number, val: changed comb number to list
-countLine = {} #key: comb number, val: count for the line
-nextLine = dd(list) # a list of all possible next line values
+canLine = [] #possible line combinations
+listLine = {} #key: combination, val: change combination value to list
+countLine = {} #key: combination, val: diagonal count for the line
+nextLine = dd(list) # a list of all possible next line combinations
 refTable = {0:"   ", 1:" \\ ", 2:" / "}
 lineImage = [[] for l in range(size)]
 def solve():
