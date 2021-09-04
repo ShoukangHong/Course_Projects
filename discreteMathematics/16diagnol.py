@@ -46,4 +46,4 @@ def diagonalsSolution(size, goal):
                     total -= 1
     backTrace()
                 
-diagonalsSolution(6,21)
+diagonalsSolution(5,16)
