@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Fri Sep  3 14:33:05 2021
-
+A Backtracking and pruning algorithm to print all possible solutions for the diagonal puzzle
 @author: shouk
 """
 
