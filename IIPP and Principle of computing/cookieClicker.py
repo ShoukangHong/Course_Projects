@@ -1,5 +1,6 @@
 """
 Cookie Clicker Simulator
+It won't score 100, I think there are something broken in the code.
 """
 
 import simpleplot
