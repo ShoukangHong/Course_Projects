@@ -1,14 +1,18 @@
+"""
+A dynamic programming method to get the maximum diagonals that can be placed in the n*n table and print one example
+This is just for curious, and I didn't spend time to make it readable...
+"""
 from collections import defaultdict as dd
 import time
 
 size = 10
-
 canLine = [] #possible line combinations
 listLine = {} #key: combination, val: change combination value to list
 countLine = {} #key: combination, val: diagonal count for the line
 nextLine = dd(list) # a list of all possible next line combinations
 refTable = {0:"   ", 1:" \\ ", 2:" / "}
 lineImage = [[] for l in range(size)]
+
 def solve():
     init()
     ans = 0
