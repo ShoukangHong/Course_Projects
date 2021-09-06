@@ -3,20 +3,22 @@
 A Backtracking and pruning algorithm to print all possible solutions for the diagonal puzzle
 @author: shouk
 """
+import time
 
 def diagonalsSolution(size, goal):
-    '''given the size and num of diagnals, print all valid results '''
-    refTable = {0:" . ", 1:"\\ ", -1:"// "}
+    '''given the size of board and goal of diagnal number, print all valid results'''
+    refTable = {0:"   ", 1:" \\ ", -1:" / "}
     gridMap = {n:0 for n in range(size*size)}
     total = 0
     
     def printBoard():
         board = [[""] * size for n in range(size)]
+        string = size*"---" + "--" + "\n"
         for i in gridMap:
             board[i//size][i%size] = refTable[gridMap[i]]
         for row in board:
-            print(row)
-        print()
+            string += "|" + "".join(row) + "|" + "\n"
+        print(string + size*"---" + "--")
      
     def isValid(n, symb):
         if n%size != 0:
@@ -30,7 +32,7 @@ def diagonalsSolution(size, goal):
             return False
         return True
             
-    def backTrace(cur = 0):
+    def backTrack(cur = 0):
         nonlocal total
         for n in range(cur, size*size):
             for symb in [1, -1]:
@@ -40,9 +42,12 @@ def diagonalsSolution(size, goal):
                     if total == goal:
                         printBoard()
                     else:
-                        backTrace(n + 1)
+                        backTrack(n + 1)
                     gridMap[n] = 0
                     total -= 1
-    backTrace()
-                
-diagonalsSolution(5,16)
+    backTrack()
+
+if __name__ == '__main__':
+    start = time.time()
+    diagonalsSolution(5,16)
+    print("finished in", str(time.time() - start)[:5], "seconds")
