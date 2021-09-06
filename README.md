@@ -1,4 +1,4 @@
-# my cousera course projects
+# My Cousera Course Projects
 This repository is used to exhibit my own work. Please submit your original work for these course projects.
 
 ## Fundamentals of Computing Specialization - Rice University
