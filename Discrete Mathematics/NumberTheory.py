@@ -14,7 +14,7 @@ def gcd(a, b):
   return max(a, b)
 
 def extended_gcd(a, b):
-    '''extended Euclid's Algorithm to find greatest common divisor d, factor a and b such that d == a * x + b * y'''
+    '''extended Euclid's Algorithm to find greatest common divisor d, factor x and y such that d == a * x + b * y'''
   assert a >= b and b >= 0 and a + b > 0
 
   if b == 0:
