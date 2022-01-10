@@ -1,13 +1,13 @@
 body {
   font-size: 16px;
   color: #fff;
-  background-color: #61122f;
+  background-color: darkgrey;
   font-family: 'Oxygen', sans-serif;
 }
 
 /** HEADER **/
 #header-nav {
-  background-color: #f6b319;
+  background-color: darkslategray;
   border-radius: 0;
   border: 0;
 }
@@ -46,7 +46,10 @@ body {
 div.item {
   margin-left: auto;
   margin-right: auto;
-  width: 75%;
+}
+
+div.space-holder {
+  margin: 8px;
   background-color: #666;
 }
 
