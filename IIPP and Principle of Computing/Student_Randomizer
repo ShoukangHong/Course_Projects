@@ -43,6 +43,7 @@ from math import ceil
 import random
 import simplegui
 
+trial = 0
 gList = []
 students = students.strip().split('\n')
 for i in range(len(students)):
@@ -50,7 +51,7 @@ for i in range(len(students)):
 
 # Button handlers
 def randomize():
-    global gList, groupSize, largerGroup
+    global trial, gList, groupSize, largerGroup
     gList = []
     random.shuffle(students)
     if largerGroup:
@@ -65,10 +66,13 @@ def randomize():
             gList.append([])
             gList[-1].append('Group ' + str(idx))
         gList[-1].append(student)
+    trial += 1
+    print("Trial " + str(trial) + " result:\n")
     for group in gList:
         for text in group:
             print(text)
-
+    print("")
+    
 def fontSizeUp():
     global font
     font += max(2, 0.08 * font)
