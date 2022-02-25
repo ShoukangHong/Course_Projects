@@ -55,7 +55,7 @@ def randomize():
     if largerGroup:
         num = len(students)//groupSize
     else:
-        num = ceil(len(students)/groupSize)
+        num = ceil(len(students)/float(groupSize))
     average = len(students)/num
     idx = 0
     for i, student in enumerate(students):
@@ -138,9 +138,9 @@ frame.add_label("Randomizer:")
 frame.add_button("Run", randomize)
 frame.add_label("")
 frame.add_label("Group Control:")
+frame.add_button("Change Adjust Mode", changeAdjustMode)
 frame.add_button("Group Size Up", groupSizeUp)
 frame.add_button("Group Size Down", groupSizeDown)
-frame.add_button("Change Adjust Mode", changeAdjustMode)
 frame.add_label("")
 frame.add_label("Display Control:")
 frame.add_button("Column number Up", colNumberUp)
@@ -151,4 +151,5 @@ frame.set_draw_handler(draw)
 
 # Start the frame animation
 frame.start()
+
 
