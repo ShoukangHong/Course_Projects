@@ -64,12 +64,12 @@ def randomize():
 
 def fontSizeUp():
     global font
-    font += 2
+    font += max(2, 0.08 * font)
     
 def fontSizeDown():
     global font
     if font > 10:
-        font -= 2
+        font -= max(2, 0.08 * font)
 
 def colNumberUp():
     global colNumber
