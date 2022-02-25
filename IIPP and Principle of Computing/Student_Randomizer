@@ -34,6 +34,7 @@ largerGroup = True	#When students cannot be devided by group size, have larger g
 colNumber = 2 		#Column number
 font = 30			#Text Font
 lineSpacing = 1.15  #line Spacing
+buttonWidth = 160	#button width
 width = 1280		#Popup Screen Width
 height = 800		#Popup Screen Height
 
@@ -135,18 +136,18 @@ def drawCol(canvas, texts, colIndex, colors):
 # Create a frame and assign callbacks to event handlers
 frame = simplegui.create_frame("Chem272 Randomizer", width, height)
 frame.add_label("Randomizer:")
-frame.add_button("Run", randomize)
+frame.add_button("Run", randomize, buttonWidth)
 frame.add_label("")
 frame.add_label("Group Control:")
-frame.add_button("Change Adjust Mode", changeAdjustMode)
-frame.add_button("Group Size Up", groupSizeUp)
-frame.add_button("Group Size Down", groupSizeDown)
+frame.add_button("Change Adjust Mode", changeAdjustMode, buttonWidth)
+frame.add_button("Group Size Up", groupSizeUp, buttonWidth)
+frame.add_button("Group Size Down", groupSizeDown, buttonWidth)
 frame.add_label("")
 frame.add_label("Display Control:")
-frame.add_button("Column number Up", colNumberUp)
-frame.add_button("Column number Down", colNumberDown)
-frame.add_button("Font Size Up", fontSizeUp)
-frame.add_button("Font Size Down", fontSizeDown)
+frame.add_button("Column Number Up", colNumberUp, buttonWidth)
+frame.add_button("Column Number Down", colNumberDown, buttonWidth)
+frame.add_button("Font Size Up", fontSizeUp, buttonWidth)
+frame.add_button("Font Size Down", fontSizeDown, buttonWidth)
 frame.set_draw_handler(draw)
 
 # Start the frame animation
