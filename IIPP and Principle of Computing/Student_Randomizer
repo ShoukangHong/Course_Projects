@@ -33,6 +33,7 @@ groupSize = 4		#Number of students per group
 largerGroup = True	#When students cannot be devided by group size, have larger group size if True,have smaller group size if False
 colNumber = 2 		#Column number
 font = 30			#Text Font
+lineSpacing = 1.15  #line Spacing
 width = 1280		#Popup Screen Width
 height = 800		#Popup Screen Height
 
@@ -82,7 +83,7 @@ def colNumberUp():
         num = len(students)//groupSize
     else:
         num = ceil(len(students)/groupSize)
-    if colNumber < num and colNumber < 4:
+    if colNumber < num and colNumber < 6:
         colNumber += 1
     
 def colNumberDown():
@@ -108,7 +109,7 @@ def changeAdjustMode():
 def draw(canvas):
     txt = "Group Size: " + str(groupSize) + "        "
     txt += "Mode: Allow Larger Group" if largerGroup else "Mode: Allow Smaller Group"
-    canvas.draw_text(txt, [font,font*(1)*1.2], font*0.8, "Green")
+    canvas.draw_text(txt, [font,font*0.8*lineSpacing], font*0.8, "Green")
     cols = []
     if not gList:
         colors = ['White' for count in range(len(students))]
@@ -129,7 +130,7 @@ def draw(canvas):
     
 def drawCol(canvas, texts, colIndex, colors):
     for row, text in enumerate(texts):
-        canvas.draw_text(text, [colIndex * width//colNumber + font,font*(row+2)*1.15], font, colors[row])
+        canvas.draw_text(text, [colIndex * width//colNumber + font,font*(row+2)*lineSpacing], font, colors[row])
         
 # Create a frame and assign callbacks to event handlers
 frame = simplegui.create_frame("Chem272 Randomizer", width, height)
