@@ -35,13 +35,14 @@ colNumber = 2 		#Column number
 font = 30			#Text Font
 lineSpacing = 1.15  #line Spacing
 buttonWidth = 160	#button width
-width = 1280		#Popup Screen Width
-height = 800		#Popup Screen Height
+windowWidth = 1280		#Popup Window Width
+windowHeight = 800		#Popup Window Height
 
 # Main logic
 from math import ceil
 import random
 import simplegui
+import re
 
 trial = 0
 gList = []
@@ -116,31 +117,27 @@ def draw(canvas):
     txt += "Mode: Allow Larger Group" if largerGroup else "Mode: Allow Smaller Group"
     canvas.draw_text(txt, [font,font*0.8*lineSpacing], font*0.8, "Green")
     cols = []
-    colors = []
     if not gList:
         for i in range(colNumber):
             cols.append([''])
-            colors.append(['White'])
             for student in students[int(ceil(i*len(students)/colNumber)):int(ceil((i+1)*len(students)/colNumber))]:
                 cols[-1].append(student)
-                colors[-1].append('White')
     else:
         for i in range(colNumber):
             cols.append([])
-            colors.append([])
             for group in gList[int(ceil(i*len(gList)/colNumber)):int(ceil((i+1)*len(gList)/colNumber))]:
                 cols[-1] += group + ['']
-                colors[-1] += ["Yellow"] + ['White' for count in range(len(group))]
 
     for colIndex, colText in enumerate(cols):
-        drawCol(canvas, colText, colIndex, colors[colIndex])
+        drawCol(canvas, colText, colIndex)
     
-def drawCol(canvas, texts, colIndex, colors):
+def drawCol(canvas, texts, colIndex):
     for row, text in enumerate(texts):
-        canvas.draw_text(text, [colIndex*width//colNumber+font,font*(row+2)*lineSpacing], font, colors[row])
+        color = "Yellow" if re.match("Group \d", text) else "White"
+        canvas.draw_text(text, [colIndex*windowWidth//colNumber+font,font*(row+2)*lineSpacing], font, color)
         
 # Create a frame and assign callbacks to event handlers
-frame = simplegui.create_frame("Chem272 Randomizer", width, height)
+frame = simplegui.create_frame("Chem272 Randomizer", windowWidth, windowHeight)
 frame.add_label("Randomizer:")
 frame.add_button("Run", randomize, buttonWidth)
 frame.add_label("")
