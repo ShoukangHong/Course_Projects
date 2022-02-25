@@ -114,12 +114,12 @@ def draw(canvas):
     if not gList:
         for i in range(colNumber):
             cols.append([''])
-            for student in students[ceil(i*len(students)/colNumber):ceil((i+1)*len(students)/colNumber)]:
+            for student in students[int(ceil(i*len(students)/colNumber)):int(ceil((i+1)*len(students)/colNumber))]:
                 cols[-1].append(student)
     else:
         for i in range(colNumber):
             cols.append([])
-            for group in gList[ceil(i*len(gList)/colNumber):ceil((i+1)*len(gList)/colNumber)]:
+            for group in gList[int(ceil(i*len(gList)/colNumber)):int(ceil((i+1)*len(gList)/colNumber))]:
                 cols[-1] += group + ['']
     for i, col in enumerate(cols):
         drawCol(canvas, col, i)
@@ -148,3 +148,4 @@ frame.set_draw_handler(draw)
 
 # Start the frame animation
 frame.start()
+
