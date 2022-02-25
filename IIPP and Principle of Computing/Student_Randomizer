@@ -1,3 +1,4 @@
+from math import ceil
 import random
 import simplegui
 students = '''
@@ -26,7 +27,8 @@ V, V
 W, W
 X, X
 Y, Y
-Z, Z'''
+Z, Z
+'''
 
 students = students.strip().split('\n')
 for i in range(len(students)):
@@ -38,14 +40,16 @@ gList = []
 font = 30
 width = 1280
 height = 800
+colNumber = 2
 
 def randomize():
     global gList, groupSize, largerGroup
     gList = []
     random.shuffle(students)
-    num = (len(students)//groupSize)
-    if len(students)%groupSize > 0 and not largerGroup:
-        num += 1
+    if largerGroup:
+        num = len(students)//groupSize
+    else:
+        num = ceil(len(students)/groupSize)
     average = len(students)/num
     idx = 0
     for i, student in enumerate(students):
@@ -67,6 +71,20 @@ def fontSizeDown():
     if font > 10:
         font -= 2
 
+def colNumberUp():
+    global colNumber
+    if largerGroup:
+        num = len(students)//groupSize
+    else:
+        num = ceil(len(students)/groupSize)
+    if colNumber < num and colNumber < 4:
+        colNumber += 1
+    
+def colNumberDown():
+    global colNumber
+    if colNumber > 2:
+        colNumber -= 1
+        
 def groupSizeUp():
     global groupSize
     if groupSize < len(students):
@@ -85,32 +103,39 @@ def draw(canvas):
     txt = "Group Size: " + str(groupSize) + "    "
     txt += "Allow Larger Group" if largerGroup else "Allow Smaller Group"
     canvas.draw_text(txt, [font,font*(1)*1.2], font*3//4, "Green")
-    if not gList:
-        row1 = [''] + students[:len(students)//2]
-        row2 = [''] + students[len(students)//2:]
-    else:
-        row1 = []
-        row2 = []
-        for group in gList[:len(gList)//2]:
-            row1 += group + ['']
-        for group in gList[len(gList)//2:]:	
-            row2 += group + ['']
-    drawRow(canvas, row1, 0)
-    drawRow(canvas, row2, 1)
     
-def drawRow(canvas, texts, i):
+    cols = []
+    if not gList:
+        for i in range(colNumber):
+            cols.append([''])
+            for student in students[ceil(i*len(students)/colNumber):ceil((i+1)*len(students)/colNumber)]:
+                cols[-1].append(student)
+    else:
+        for i in range(colNumber):
+            cols.append([])
+            for group in gList[ceil(i*len(gList)/colNumber):ceil((i+1)*len(gList)/colNumber)]:
+                cols[-1] += group + ['']
+    for i, col in enumerate(cols):
+        drawCol(canvas, col, i)
+    
+def drawCol(canvas, texts, i):
     for j, text in enumerate(texts):
         color = "Yellow" if "Group" in text else "White"
-        canvas.draw_text(text, [i * width//2 + font,font*(j+2)*1.2], font, color)
+        canvas.draw_text(text, [i * width//colNumber + font,font*(j+2)*1.15], font, color)
         
 # Create a frame and assign callbacks to event handlers
-frame = simplegui.create_frame("Home", width, height)
-frame.add_button("Randomize", randomize)
+frame = simplegui.create_frame("Chem272 Randomizer", width, height)
+frame.add_label("")
+frame.add_button("Run", randomize)
+frame.add_label("")
 frame.add_label("Group Control:")
 frame.add_button("Group Size Up", groupSizeUp)
 frame.add_button("Group Size Down", groupSizeDown)
 frame.add_button("Change Adjust Mode", changeAdjustMode)
+frame.add_label("")
 frame.add_label("Display Control:")
+frame.add_button("Column number Up", colNumberUp)
+frame.add_button("Column number Down", colNumberDown)
 frame.add_button("Font Size Up", fontSizeUp)
 frame.add_button("Font Size Down", fontSizeDown)
 frame.set_draw_handler(draw)
