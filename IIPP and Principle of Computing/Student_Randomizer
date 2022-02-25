@@ -1,6 +1,4 @@
-from math import ceil
-import random
-import simplegui
+#paste student list here, one student per line, do not remove the '''
 students = '''
 A, A
 B, B
@@ -30,18 +28,25 @@ Y, Y
 Z, Z
 '''
 
+# Default setups
+groupSize = 4		#Number of students per group
+largerGroup = True	#When students cannot be devided by group size, have larger group size if True,have smaller group size if False
+colNumber = 2 		#Column number
+font = 30			#Text Font
+width = 1280		#Popup Screen Width
+height = 800		#Popup Screen Height
+
+# Main logic
+from math import ceil
+import random
+import simplegui
+
+gList = []
 students = students.strip().split('\n')
 for i in range(len(students)):
     students[i] = students[i].strip()
-    
-groupSize = 4
-largerGroup = True
-gList = []
-font = 30
-width = 1280
-height = 800
-colNumber = 2
 
+# Button handlers
 def randomize():
     global gList, groupSize, largerGroup
     gList = []
@@ -98,11 +103,12 @@ def groupSizeDown():
 def changeAdjustMode():
     global largerGroup
     largerGroup = not largerGroup
+    
 # Handler to draw on canvas
 def draw(canvas):
     txt = "Group Size: " + str(groupSize) + "        "
     txt += "Mode: Allow Larger Group" if largerGroup else "Mode: Allow Smaller Group"
-    canvas.draw_text(txt, [font,font*(1)*1.2], font*3//4, "Green")
+    canvas.draw_text(txt, [font,font*(1)*1.2], font*0.8, "Green")
     
     cols = []
     if not gList:
@@ -125,7 +131,7 @@ def drawCol(canvas, texts, i):
         
 # Create a frame and assign callbacks to event handlers
 frame = simplegui.create_frame("Chem272 Randomizer", width, height)
-frame.add_label("")
+frame.add_label("Randomizer:")
 frame.add_button("Run", randomize)
 frame.add_label("")
 frame.add_label("Group Control:")
