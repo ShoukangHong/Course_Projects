@@ -109,25 +109,27 @@ def draw(canvas):
     txt = "Group Size: " + str(groupSize) + "        "
     txt += "Mode: Allow Larger Group" if largerGroup else "Mode: Allow Smaller Group"
     canvas.draw_text(txt, [font,font*(1)*1.2], font*0.8, "Green")
-    
     cols = []
     if not gList:
+        colors = ['White' for count in range(len(students))]
         for i in range(colNumber):
             cols.append([''])
             for student in students[int(ceil(i*len(students)/colNumber)):int(ceil((i+1)*len(students)/colNumber))]:
                 cols[-1].append(student)
     else:
+        colors = []
         for i in range(colNumber):
             cols.append([])
             for group in gList[int(ceil(i*len(gList)/colNumber)):int(ceil((i+1)*len(gList)/colNumber))]:
                 cols[-1] += group + ['']
-    for i, col in enumerate(cols):
-        drawCol(canvas, col, i)
+                colors+= ["Yellow"] + ['White' for count in range(len(group))]
+                
+    for colIndex, colText in enumerate(cols):
+        drawCol(canvas, colText, colIndex, colors)
     
-def drawCol(canvas, texts, i):
-    for j, text in enumerate(texts):
-        color = "Yellow" if "Group" in text else "White"
-        canvas.draw_text(text, [i * width//colNumber + font,font*(j+2)*1.15], font, color)
+def drawCol(canvas, texts, colIndex, colors):
+    for row, text in enumerate(texts):
+        canvas.draw_text(text, [colIndex * width//colNumber + font,font*(row+2)*1.15], font, colors[row])
         
 # Create a frame and assign callbacks to event handlers
 frame = simplegui.create_frame("Chem272 Randomizer", width, height)
