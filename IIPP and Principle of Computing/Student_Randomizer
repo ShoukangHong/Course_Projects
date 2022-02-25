@@ -35,7 +35,7 @@ for i in range(len(students)):
     students[i] = students[i].strip()
     
 groupSize = 4
-largerGroup = False
+largerGroup = True
 gList = []
 font = 30
 width = 1280
@@ -100,8 +100,8 @@ def changeAdjustMode():
     largerGroup = not largerGroup
 # Handler to draw on canvas
 def draw(canvas):
-    txt = "Group Size: " + str(groupSize) + "    "
-    txt += "Allow Larger Group" if largerGroup else "Allow Smaller Group"
+    txt = "Group Size: " + str(groupSize) + "        "
+    txt += "Mode: Allow Larger Group" if largerGroup else "Mode: Allow Smaller Group"
     canvas.draw_text(txt, [font,font*(1)*1.2], font*3//4, "Green")
     
     cols = []
